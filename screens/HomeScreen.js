@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import ExpenseList from "../components/ExpenseList";
 import TotalExpense from "../components/TotalExpense";
 
@@ -8,7 +8,9 @@ function HomeScreen() {
         <View>
             <TotalExpense/>
             <Text>All Expenses</Text>
-            <ExpenseList/>
+            <ScrollView>
+                <ExpenseList/>
+            </ScrollView>
         </View>
     );
 }

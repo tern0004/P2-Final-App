@@ -9,6 +9,30 @@ function ExpenseList() {
             <ExpenseItem money={'$300'} title={'Shopping'}/>
             <ExpenseItem money={'$400'} title={'Stuff'}/>
             <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
+            <ExpenseItem money={'$300'} title={'Shopping'}/>
+            <ExpenseItem money={'$400'} title={'Stuff'}/>
+            <ExpenseItem money={'$300'} title={'Books'}/>
 
         </View>
     );
