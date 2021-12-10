@@ -5,12 +5,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import CreateExpenseScreen from './screens/CreateExpenseScreen'
 import { useState, useEfect } from 'react';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Stack = createStackNavigator()
 
 export default function App() {
-  const [expenses, setExpenses] = useState([])
+  const [expenses, setExpenses] = useState([{id: 1, name: "Cat"}])
+
+  const addExpense = (item) => {
+    setExpenses([...expenses, item])
+  }
   
 
   return (
@@ -20,7 +24,9 @@ export default function App() {
         options={{
           title: "Welcome to our expense app"
         }}/>
-        <Stack.Screen name = "CreateExpense" component={CreateExpenseScreen} />
+        <Stack.Screen name = "CreateExpense"  >
+        {(props) => <CreateExpenseScreen {...props} addExpense = {addExpense} expenses = {expenses} />}
+          </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
