@@ -1,21 +1,38 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, FlatList, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export default function HomeScreen({ navigation, route }) {
+export default function HomeScreen( { navigation, route, expenses } ) {
     // console.log(navigation)
     // console.log(route)
-
+    console.log(expenses)
     
     return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <Text>This is the HomeScreen</Text>
+        
+        <FlatList
+        data={ expenses }
+        renderItem={(item) => <Expense expense={item} /> }
+        keyExtractor={(item, index) => {
+            return item.title+'-'+index
+        }}
+        />
         <Button title="Create expense" onPress = {() => {
             navigation.navigate('CreateExpense')
         }}
         />
         <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
+    )
+}
+
+function Expense( {expense} ){
+    return (
+        <View>
+            <Text>{expense.item.title}</Text>
+            <Text>{expense.item.price}</Text>
+        </View>
     )
 }
 

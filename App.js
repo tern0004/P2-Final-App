@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 const Stack = createStackNavigator()
 
 export default function App() {
-  const [expenses, setExpenses] = useState([{id: 1, name: "Cat"}])
+  const [expenses, setExpenses] = useState([{id: 1, title: "McDonalds", price: 9.99}])
 
   const addExpense = (item) => {
     setExpenses([...expenses, item])
@@ -20,13 +20,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name = "Home" component={HomeScreen} 
-        options={{
-          title: "Welcome to our expense app"
-        }}/>
+        <Stack.Screen name = "Home" >
+          {(props) => <HomeScreen { ...props } expenses = {expenses}/>}
+        </Stack.Screen>
         <Stack.Screen name = "CreateExpense"  >
-        {(props) => <CreateExpenseScreen {...props} addExpense = {addExpense} expenses = {expenses} />}
-          </Stack.Screen>
+          {(props) => <CreateExpenseScreen {...props} addExpense = {addExpense} expenses = {expenses} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
