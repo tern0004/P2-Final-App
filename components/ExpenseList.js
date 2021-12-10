@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, View} from "react-native";
+import {Text, SafeAreaView} from "react-native";
 import ExpenseItem from "./ExpenseItem";
 
 
 function ExpenseList() {
     return (
-        <View>
+        <SafeAreaView>
             <ExpenseItem money={'$300'} title={'Shopping'}/>
             <ExpenseItem money={'$400'} title={'Stuff'}/>
             <ExpenseItem money={'$300'} title={'Books'}/>
@@ -34,7 +34,7 @@ function ExpenseList() {
             <ExpenseItem money={'$400'} title={'Stuff'}/>
             <ExpenseItem money={'$300'} title={'Books'}/>
 
-        </View>
+        </SafeAreaView>
     );
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from "react-native";
+import {StyleSheet, Text, View, Button} from 'react-native';
 
 function ExpenseItem ( props, { navigation }) {
     return (
         <View style={styles.item}>
             <Text style={styles.itemMoney}>{props.money}</Text>
             <Text style={styles.itemTitle}>{props.title}</Text>
-            <Button style={styles.itemDetails} title="View Details" onPress={() => {navigation.navigate('ExpenseDetails')}}/>
+            <Button style={styles.itemDetails} title='View Details' onPress={() => {navigation.navigate('ExpenseDetails')}}/>
         </View>
     );
 }
