@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
 
 function ExpenseDetails() {
     return (
-        <View>
+        <View >
             <Text>This is Expense Details Screen!</Text>
         </View>
     );

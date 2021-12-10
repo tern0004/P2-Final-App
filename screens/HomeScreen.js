@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import ExpenseList from "../components/ExpenseList";
 
 function HomeScreen() {
     return (
         <View>
-            <Text>This is Home Screen!</Text>
+            <ExpenseList/>
         </View>
     );
 }
