@@ -1,18 +1,44 @@
-import React from 'react';
-import { SafeAreaView, Text, ScrollView } from 'react-native';
-import ExpenseList from "../components/ExpenseList";
+import React from 'react'
+import { View, Text, StyleSheet, Button, FlatList, SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import TotalExpense from "../components/TotalExpense";
+import ExpenseList from "../components/ExpenseList";
 
-function HomeScreen() {
+export default function HomeScreen( { navigation, route, expenses } ) {
+
+    //console.log(expenses)
+
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <TotalExpense/>
             <Text>All Expenses</Text>
-            <ScrollView>
-                <ExpenseList/>
-            </ScrollView>
+            <ExpenseList expensesData={expenses}/>
+
+            <Button title="Create expense" onPress = {() => {
+                navigation.navigate('CreateExpense')
+            }}
+            />
+            <Button title="Debug Button" onPress = {() => {
+                navigation.navigate('ExpenseDetails')
+            }}
+            />
+            <StatusBar style="auto" />
         </SafeAreaView>
-    );
+    )
 }
 
-export default HomeScreen;
+function Expense( {expense} ){
+    return (
+        <View>
+            <Text>{expense.item.title}</Text>
+            <Text>{expense.item.price}</Text>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+
+    },
+
+});
