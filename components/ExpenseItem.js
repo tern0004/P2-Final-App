@@ -6,7 +6,7 @@ function ExpenseItem ( props, { navigation }) {
         <View style={styles.item}>
             <Text style={styles.itemMoney}>${props.price}</Text>
             <Text style={styles.itemTitle}>{props.title}</Text>
-            <Button style={styles.itemDetails} title='View Details' onPress={() => {navigation.navigate('ExpenseDetails')}}/>
+            {/*<Button style={styles.itemDetails} title='View Details' onPress={() => {navigation.navigate('ExpenseDetails')}}/>*/}
         </View>
     );
 }
