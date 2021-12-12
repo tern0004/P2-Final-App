@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button, FlatList, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+
 import TotalExpense from "../components/TotalExpense";
 import ExpenseList from "../components/ExpenseList";
 
@@ -24,6 +25,7 @@ export default function HomeScreen( { navigation, route, expenses } ) {
             />
             <StatusBar style="auto" />
         </SafeAreaView>
+
     )
 }
 
@@ -39,6 +41,8 @@ function Expense( {expense} ){
 const styles = StyleSheet.create({
     container: {
 
+
     },
 
 });
+

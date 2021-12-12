@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
 
 
+
     const [title, onChangeTitle] = useState("")
     const [price, onChangePrice] = useState(null)
     // const [date, setDate] = useState(null)
@@ -28,58 +29,58 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     // console.log(navigation)
 
-
-
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scrollView}>
-                <Text>Expense Screen</Text>
-                <StatusBar style="auto" />
-                <TextInput
-                    style={styles.input}
-                    onChangeText = {onChangeTitle}
-                    value = {title}
-                    placeholder= "enter expense name"
-                />
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText = {onChangePrice}
-                    value = {price}
-                    placeholder= "enter expense value"
-                    keyboardType = "numeric"
-                />
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+          <Text>Expense Screen</Text>
+          <StatusBar style="auto" />
+          <TextInput 
+          style={styles.input}
+          onChangeText = {onChangeTitle}
+          value = {title}
+          placeholder= "enter expense name"
+          ></TextInput>
 
-                <Button
-                    title = {"submit"}
-                    onPress = { () => {
-                        onSubmit()
-                    }}
-                />
+          <TextInput 
+          style={styles.input}
+          onChangeText = {onChangePrice}
+          value = {price}
+          placeholder= "enter expense value"
+          keyboardType = "numeric"
+          ></TextInput>
 
+          <Button
+          title = {"submit"}
+          onPress = { () => {
+            onSubmit()
+          }}
+          />
 
+      </ScrollView>
+    </SafeAreaView>
 
-            </ScrollView>
-        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        // alignItems: 'center',
-        // justifyContent: 'center',
 
+      flex: 1,
+      backgroundColor: '#fff',
+      // alignItems: 'center',
+      // justifyContent: 'center',
+      
     },
     input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
     },
     scrollView: {
-        backgroundColor: 'pink',
-        marginHorizontal: 20
+      backgroundColor: 'pink',
+      marginHorizontal: 20
     }
-});
+  });
+
