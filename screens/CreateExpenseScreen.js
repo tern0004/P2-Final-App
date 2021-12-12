@@ -7,30 +7,30 @@ import { useState, useEffect } from 'react';
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
 
 
-  const [title, onChangeTitle] = useState("")
-  const [price, onChangePrice] = useState(null)
-  // const [date, setDate] = useState(null)
-  // const [date, setDate] = useState(route.params.id)
 
-  // console.log(route)
-  // console.log(route)
-  // console.log(navigation)
-  // console.log(addExpense)
+    const [title, onChangeTitle] = useState("")
+    const [price, onChangePrice] = useState(null)
+    // const [date, setDate] = useState(null)
+    // const [date, setDate] = useState(route.params.id)
 
-  const onSubmit = (ev) => {
-    let newDate = Date.now()
-    addExpense({id: newDate, title, price})
-    onChangeTitle("")
-    onChangePrice(null)
-    // setDate(null)
-    navigation.navigate('Home')
-  }
+    // console.log(route)
+    // console.log(route)
+    // console.log(navigation)
+    // console.log(addExpense)
 
-  // console.log(navigation)
+    const onSubmit = (ev) => {
+        let newDate = Date.now()
+        addExpense({id: newDate, title, price})
+        onChangeTitle("")
+        onChangePrice(null)
+        // setDate(null)
+        navigation.navigate('Home')
+    }
 
-
+    // console.log(navigation)
 
     return (
+
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
           <Text>Expense Screen</Text>
@@ -57,15 +57,15 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           }}
           />
 
-          
-
       </ScrollView>
     </SafeAreaView>
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+
       flex: 1,
       backgroundColor: '#fff',
       // alignItems: 'center',
@@ -83,3 +83,4 @@ const styles = StyleSheet.create({
       marginHorizontal: 20
     }
   });
+
