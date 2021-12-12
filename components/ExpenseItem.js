@@ -1,13 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import { useNavigation} from '@react-navigation/native';
+import {StyleSheet, Text, Pressable} from 'react-native';
 
-function ExpenseItem ( props, { navigation }) {
+function ExpenseItem (props) {
+
+    const navigation = useNavigation();
+
     return (
-        <View style={styles.item}>
+        <Pressable style={styles.item} onPress={ () => { navigation.navigate('ExpenseDetails') }}>
             <Text style={styles.itemMoney}>${props.price}</Text>
             <Text style={styles.itemTitle}>{props.title}</Text>
-            {/*<Button style={styles.itemDetails} title='View Details' onPress={() => {navigation.navigate('ExpenseDetails')}}/>*/}
-        </View>
+        </Pressable>
     );
 }
 const styles = StyleSheet.create({
