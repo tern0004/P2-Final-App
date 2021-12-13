@@ -1,7 +1,17 @@
 import React from 'react'
-import { Text, StyleSheet, TextInput, Keyboard, ScrollView, SafeAreaView, Button, Alert } from 'react-native';
+import {
+    Text,
+    StyleSheet,
+    TextInput,
+    Keyboard,
+    ScrollView,
+    SafeAreaView,
+    Button,
+    Alert
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
+import * as ImagePicker from 'expo-image-picker'
 
 
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
@@ -23,8 +33,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         console.log('Taking Photo')
     }
 
-    const useImageGallery = () => {
-      console.log('Picking Image from Gallery')
+    const useImageGallery = async () => {
+
+      let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if(permission.granted === false) { return }
+
+      let picker = await ImagePicker.launchImageLibraryAsync()
+      console.log(picker)
     }
     const onAddImage = () => {
         Alert.alert('Add  Image','Choose how do you want to add image.', [
