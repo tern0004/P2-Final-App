@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, Keyboard, ScrollView, SafeAreaView, Button} from 'react-native';
+import { Text, StyleSheet, TextInput, Keyboard, ScrollView, SafeAreaView, Button, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 
@@ -10,13 +10,6 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     const [title, onChangeTitle] = useState("")
     const [price, onChangePrice] = useState(null)
-    // const [date, setDate] = useState(null)
-    // const [date, setDate] = useState(route.params.id)
-
-    // console.log(route)
-    // console.log(route)
-    // console.log(navigation)
-    // console.log(addExpense)
 
     const onSubmit = (ev) => {
         let newDate = Date.now()
@@ -26,8 +19,19 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         // setDate(null)
         navigation.navigate('Home')
     }
+    const useCameraImage = () => {
+        console.log('Taking Photo')
+    }
 
-    // console.log(navigation)
+    const useImageGallery = () => {
+      console.log('Picking Image from Gallery')
+    }
+    const onAddImage = () => {
+        Alert.alert('Add  Image','Choose how do you want to add image.', [
+            { text: 'Camera', onPress: () => { useCameraImage() } },
+            { text: 'Existing Image', onPress: () => { useImageGallery() } }
+        ])
+    }
 
     return (
 
@@ -40,7 +44,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           onChangeText = {onChangeTitle}
           value = {title}
           placeholder= "enter expense name"
-          ></TextInput>
+          />
 
           <TextInput 
           style={styles.input}
@@ -48,8 +52,14 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           value = {price}
           placeholder= "enter expense value"
           keyboardType = "numeric"
-          ></TextInput>
+          />
 
+          <Button
+              title = 'Add Picture'
+              onPress = { () => {
+                  onAddImage()
+              }}
+          />
           <Button
           title = {"submit"}
           onPress = { () => {
