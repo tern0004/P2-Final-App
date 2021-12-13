@@ -6,11 +6,12 @@ import HomeScreen from './screens/HomeScreen';
 import CreateExpenseScreen from './screens/CreateExpenseScreen'
 import { useState, useEfect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
+import CameraScreen from './screens/CameraScreen'
 import ExpenseDetails from "./screens/ExpenseDetails";
 
 
 const Stack = createStackNavigator()
+
 
 export default function App() {
 
@@ -29,6 +30,9 @@ export default function App() {
                 </Stack.Screen>
                 <Stack.Screen name = 'CreateExpense'  >
                     {(props) => <CreateExpenseScreen {...props} addExpense = {addExpense} expenses = {expenses} />}
+                </Stack.Screen>
+                <Stack.Screen name = "CameraScreen" >
+                    {(props) => <CameraScreen {...props} />}
                 </Stack.Screen>
                 <Stack.Screen name='ExpenseDetails' component={ExpenseDetails} />
             </Stack.Navigator>

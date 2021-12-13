@@ -7,11 +7,13 @@ import {
     ScrollView,
     SafeAreaView,
     Button,
-    Alert
+    Alert,
+    Image
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import * as ImagePicker from 'expo-image-picker'
+import * as ImagePicker from 'expo-image-picker';
+import { Camera } from 'expo-camera';
 
 
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
@@ -20,17 +22,28 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     const [title, onChangeTitle] = useState("")
     const [price, onChangePrice] = useState(null)
+    const [imageFile, onChangeImageFile] = useState(null)
+
+    useEffect(() => {
+        console.log(imageFile)
+    }, [imageFile])
 
     const onSubmit = (ev) => {
         let newDate = Date.now()
         addExpense({id: newDate, title, price})
         onChangeTitle("")
         onChangePrice(null)
+        onChangeImageFile(null)
         // setDate(null)
         navigation.navigate('Home')
     }
+
+    const setCameraImage = (data) => {
+        onChangeImageFile(data)
+    }
+
     const useCameraImage = () => {
-        console.log('Taking Photo')
+        navigation.navigate('CameraScreen', { setCameraImage })
     }
 
     const useImageGallery = async () => {
@@ -82,6 +95,8 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           }}
           />
 
+          {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
+
       </ScrollView>
     </SafeAreaView>
 
@@ -93,8 +108,6 @@ const styles = StyleSheet.create({
 
       flex: 1,
       backgroundColor: '#fff',
-      // alignItems: 'center',
-      // justifyContent: 'center',
       
     },
     input: {
@@ -106,6 +119,10 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: 'pink',
       marginHorizontal: 20
+    },
+    imageView: {
+        height: 300,
+        width: 300
     }
   });
 
