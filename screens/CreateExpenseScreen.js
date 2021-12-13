@@ -20,9 +20,11 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     const onSubmit = (ev) => {
         let newDate = Date.now()
-        addExpense({id: newDate, title, price})
+        addExpense({id: newDate, title, price, imageFile})
         onChangeTitle("")
         onChangePrice(null)
+        onChangeImageFile(null)
+
         // setDate(null)
         navigation.navigate('Home')
     }
@@ -75,7 +77,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
             style = {styles.imageView}
             source = {
               {uri: imageFile}
-           
+          
             }
             />)}
 
