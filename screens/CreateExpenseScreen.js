@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, Keyboard, ScrollView, SafeAreaView, Button} from 'react-native';
+import { View, Text, StyleSheet, TextInput, Keyboard, ScrollView, SafeAreaView, Button, Image} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
+import { Camera } from 'expo-camera';
+
 
 
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
@@ -10,13 +12,11 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     const [title, onChangeTitle] = useState("")
     const [price, onChangePrice] = useState(null)
-    // const [date, setDate] = useState(null)
-    // const [date, setDate] = useState(route.params.id)
+    const [imageFile, onChangeImageFile] = useState(null)
 
-    // console.log(route)
-    // console.log(route)
-    // console.log(navigation)
-    // console.log(addExpense)
+    useEffect(() => {
+      console.log(imageFile)
+    }, [imageFile])
 
     const onSubmit = (ev) => {
         let newDate = Date.now()
@@ -27,9 +27,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         navigation.navigate('Home')
     }
 
-    // console.log(navigation)
+    const setCameraImage = (data) => {
+      onChangeImageFile(data)
+    }
 
     return (
+
+    
 
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -51,11 +55,29 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           ></TextInput>
 
           <Button
+          title={"take picture"}
+          onPress={() =>  {
+            navigation.navigate("CameraScreen", {
+              setCameraImage
+            })
+          }}
+          />
+          
+
+          <Button
           title = {"submit"}
           onPress = { () => {
             onSubmit()
           }}
           />
+
+          {imageFile && (<Image
+            style = {styles.imageView}
+            source = {
+              {uri: imageFile}
+           
+            }
+            />)}
 
       </ScrollView>
     </SafeAreaView>
@@ -81,6 +103,10 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: 'pink',
       marginHorizontal: 20
+    },
+    imageView: {
+      height: 300, 
+      width: 300
     }
   });
 
