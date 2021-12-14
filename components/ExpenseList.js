@@ -11,8 +11,9 @@ function ExpenseList(props) {
 
                 <FlatList
                     data={ props.expensesData }
-                    renderItem={({ item }) => <ExpenseItem price={ item.price } title={ item.title } /> }
+                    renderItem={({ item }) => <ExpenseItem price={ item.price } title={ item.title } deleteExpense={props.deleteExpense} id={item.id}/> }
                     keyExtractor={(item) => item.id}
+                    extraData={props.deleteExpense}
                 />
 
                 {/*
