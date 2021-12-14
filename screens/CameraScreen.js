@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
 import { Camera } from 'expo-camera';
 
+
 export default function CameraScreen( { route } ) {
     const [ready, setReady] = useState(false);
     let camera = useRef();

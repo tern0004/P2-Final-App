@@ -1216,6 +1216,13 @@
   dependencies:
     "dequal" "^1.0.0"
 
+"@koale/useworker@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@koale/useworker/-/useworker-4.0.2.tgz#cb540a2581cd6025307c3ca6685bc60748773e58"
+  integrity sha512-xPIPADtom8/3/4FLNj7MvNcBM/Z2FleH85Fdx2O869eoKW8+PoEgtSVvoxWjCWMA46Sm9A5/R1TyzNGc+yM0wg==
+  dependencies:
+    dequal "^1.0.0"
+
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -3139,6 +3146,7 @@
   "version" "2.8.0"
   dependencies:
     "has" "^1.0.3"
+
 
 "is-data-descriptor@^0.1.4":
   "integrity" "sha1-C17mSDiOLIYCgueT8YVv7D8wG1Y="

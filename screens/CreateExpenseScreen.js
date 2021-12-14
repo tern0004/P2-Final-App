@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
     Text,
     StyleSheet,
@@ -16,6 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
 
+
 export default function CreateExpenseScreen( { route, navigation, addExpense }) {
 
 
@@ -25,12 +27,14 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
     const [imageFile, onChangeImageFile] = useState(null)
 
     useEffect(() => {
+
         console.log(imageFile)
+
     }, [imageFile])
 
     const onSubmit = (ev) => {
         let newDate = Date.now()
-        addExpense({id: newDate, title, price})
+        addExpense({id: newDate, title, price, imageFile})
         onChangeTitle("")
         onChangePrice(null)
         onChangeImageFile(null)
@@ -39,6 +43,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
     }
 
     const setCameraImage = (data) => {
+
         onChangeImageFile(data)
     }
 
@@ -59,9 +64,12 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
             { text: 'Camera', onPress: () => { useCameraImage() } },
             { text: 'Existing Image', onPress: () => { useImageGallery() } }
         ])
+
     }
 
     return (
+
+    
 
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -83,11 +91,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           />
 
           <Button
+
               title = 'Add Picture'
               onPress = { () => {
                   onAddImage()
               }}
           />
+
           <Button
           title = {"submit"}
           onPress = { () => {
@@ -95,7 +105,9 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           }}
           />
 
+
           {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
+
 
       </ScrollView>
     </SafeAreaView>
@@ -121,8 +133,10 @@ const styles = StyleSheet.create({
       marginHorizontal: 20
     },
     imageView: {
+
         height: 300,
         width: 300
+
     }
   });
 
