@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Button, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
 
 import TotalExpense from "../components/TotalExpense";
 import ExpenseList from "../components/ExpenseList";
 
 export default function HomeScreen( { navigation, route, expenses } ) {
 
-    //console.log(expenses)
 
     return (
         <SafeAreaView style={styles.container}>
@@ -15,26 +15,10 @@ export default function HomeScreen( { navigation, route, expenses } ) {
             <Text>All Expenses</Text>
             <ExpenseList expensesData={expenses}/>
 
-            <Button title="Create expense" onPress = {() => {
-                navigation.navigate('CreateExpense')
-            }}
-            />
-            <Button title="Debug Button" onPress = {() => {
-                navigation.navigate('ExpenseDetails')
-            }}
-            />
+            <Button title="Create expense" onPress = {() => { navigation.navigate('CreateExpense') }} />
             <StatusBar style="auto" />
         </SafeAreaView>
 
-    )
-}
-
-function Expense( {expense} ){
-    return (
-        <View>
-            <Text>{expense.item.title}</Text>
-            <Text>{expense.item.price}</Text>
-        </View>
     )
 }
 
