@@ -6,14 +6,14 @@ import { useFonts } from 'expo-font';
 import TotalExpense from "../components/TotalExpense";
 import ExpenseList from "../components/ExpenseList";
 
-export default function HomeScreen( { navigation, route, expenses } ) {
+export default function HomeScreen( { navigation, route, expenses, deleteExpense } ) {
 
 
     return (
         <SafeAreaView style={styles.container}>
-            <TotalExpense/>
+            <TotalExpense expensesData={expenses} />
             <Text>All Expenses</Text>
-            <ExpenseList expensesData={expenses}/>
+            <ExpenseList expensesData={expenses} deleteExpense={deleteExpense}/>
 
             <Button title="Create expense" onPress = {() => { navigation.navigate('CreateExpense') }} />
             <StatusBar style="auto" />
