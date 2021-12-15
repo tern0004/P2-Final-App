@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 
 import {
     Text,
@@ -9,10 +10,11 @@ import {
     SafeAreaView,
     Button,
     Alert,
-    Image
+    Image, 
+    KeyboardAvoidingView,
+    Platform
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
@@ -71,12 +73,15 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
     
 
-    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <ScrollView style={styles.scrollView}>
           <Text>Expense Screen</Text>
           <StatusBar style="auto" />
           <TextInput 
           style={styles.input}
+          onSubmitEditing={Keyboard.dismiss}
           onChangeText = {onChangeTitle}
           value = {title}
           placeholder= "enter expense name"
@@ -88,6 +93,8 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           value = {price}
           placeholder= "enter expense value"
           keyboardType = "numeric"
+          onSubmitEditing={Keyboard.dismiss}
+
           />
 
           <Button
@@ -110,7 +117,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
 
       </ScrollView>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
 
     )
 }
