@@ -14,6 +14,7 @@ import ExpenseDetails from "./screens/ExpenseDetails";
 
 const Stack = createStackNavigator()
 
+
 export default function App() {
 
     const [expenses, setExpenses] = useState([{id: 0, title: "McDonalds", price: 9.99}, {id: 1, title: "Shopping", price: 300}, {id: 2, title: "Books", price: 250}])
@@ -63,10 +64,10 @@ export default function App() {
                 <Stack.Screen name = 'CreateExpense'  >
                     {(props) => <CreateExpenseScreen {...props} addExpense = {addExpense}  expenses = {expenses} />}
                 </Stack.Screen>
-                <Stack.Screen name='ExpenseDetails' component={ExpenseDetails} />
                 <Stack.Screen name = "CameraScreen" >
-                  {(props) => <CameraScreen {...props} />}
+                    {(props) => <CameraScreen {...props} />}
                 </Stack.Screen>
+                <Stack.Screen name='ExpenseDetails' component={ExpenseDetails} />
             </Stack.Navigator>
         </NavigationContainer>
     );

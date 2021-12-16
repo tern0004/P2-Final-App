@@ -1,11 +1,10 @@
 import React from 'react';
-import {Text, SafeAreaView, FlatList} from "react-native";
+import { SafeAreaView, FlatList } from "react-native";
 import ExpenseItem from "./ExpenseItem";
 
 
 function ExpenseList(props) {
 
-        console.log(props.expensesData)
     return (
         <SafeAreaView>
 
@@ -15,12 +14,6 @@ function ExpenseList(props) {
                     keyExtractor={(item) => item.id}
                     extraData={props.deleteExpense}
                 />
-
-                {/*
-                        <ExpenseItem money={'$300'} title={'Shopping'}/>
-                        <ExpenseItem money={'$400'} title={'Stuff'}/>
-                         <ExpenseItem money={'$300'} title={'Books'}/>
-                */}
 
         </SafeAreaView>
     );

@@ -1,14 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import { useNavigation} from '@react-navigation/native';
+import {StyleSheet, Text, Pressable, View, Button} from 'react-native';
+import { useFonts } from 'expo-font';
 
-function ExpenseItem ( props, navigation) {
+function ExpenseItem (props) {
+
+    const navigation = useNavigation();
+    const [loaded] = useFonts({
+        Verdana: require('../assets/fonts/Verdana.ttf'),
+        'Handlee-Regular': require('../assets/fonts/Handlee-Regular.ttf')
+    });
+
+    if (!loaded) { return null }
+
     return (
-        <View style={styles.item}>
-            <Text style={styles.itemMoney}>${props.price}</Text>
-            <Text style={styles.itemTitle}>{props.title}</Text>
-            <Button style={styles.itemDetails} title='Delete' onPress={() => props.deleteExpense(props.id)}/>
-        </View>
-    );
+            <View style = {styles.item}>
+            <Pressable onPress={ () => { navigation.navigate('ExpenseDetails') }}>
+                <Text style={styles.itemMoney}>${props.price}</Text>
+                <Text style={styles.itemTitle}>{props.title}</Text>
+            </Pressable>
+            <Button style={styles.itemDetails} title="Delete" onPress={()=> props.deleteExpense(props.id)} />
+            </View>
+    )
 }
 const styles = StyleSheet.create({
     item: {
@@ -22,17 +35,17 @@ const styles = StyleSheet.create({
     },
     itemMoney: {
         fontSize: 24,
-        fontFamily: 'Verdana',
+        fontFamily: 'Handlee-Regular',
         color: 'red'
     },
     itemDetails: {
-        backgroundColor: '#FFF',
         fontSize: 18,
-        fontFamily: 'Verdana'
+        fontFamily: 'Handlee-Regular',
+        backgroundColor: '#FFF',
     },
     itemTitle: {
         fontSize: 20,
-        fontFamily: 'Verdana'
+        fontFamily: 'Handlee-Regular'
     }
 
 })

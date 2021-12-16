@@ -2,12 +2,20 @@ import React from 'react';
 import {Text, View, StyleSheet} from "react-native";
 
 function TotalExpense(props) {
+    
+    
+    const sum =  (props.expensesData)
+        .map(item => parseFloat(item.price))
+        .reduce((prev, next) => prev + next, 0)
+    
+
     return (
         <View style={styles.totalItem}>
-            <Text style={styles.totalItemTxt}>$1500</Text>
+            <Text style={styles.totalItemTxt}>{sum}</Text>
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
 
