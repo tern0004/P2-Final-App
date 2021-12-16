@@ -15,11 +15,11 @@ function ExpenseItem (props) {
 
     return (
             <View style = {styles.item}>
-            <Pressable onPress={ () => { navigation.navigate('ExpenseDetails') }}>
-                <Text style={styles.itemMoney}>${props.price}</Text>
-                <Text style={styles.itemTitle}>{props.title}</Text>
-            </Pressable>
-            <Button style={styles.itemDetails} title="Delete" onPress={()=> props.deleteExpense(props.id)} />
+                <Pressable onPress={ () => { navigation.navigate('ExpenseDetails') }}>
+                    <Text style={styles.itemMoney}>${props.price}</Text>
+                    <Text style={styles.itemTitle}>{props.title}</Text>
+                </Pressable>
+                <Button style={styles.itemDetails} title="Delete" onPress={()=> props.deleteExpense(props.id)} />
             </View>
     )
 }

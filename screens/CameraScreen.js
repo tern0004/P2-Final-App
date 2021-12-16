@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as ImagePicker from "expo-image-picker";
 
 
 export default function CameraScreen( { route } ) {
@@ -28,6 +29,16 @@ export default function CameraScreen( { route } ) {
                 //to permanently save the image
             });
     };
+
+    const useImageGallery = async () => {
+
+        let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if(permission.granted === false) { return }
+
+        let picker = await ImagePicker.launchImageLibraryAsync()
+        console.log(picker)
+    }
+
     const beenSaved = (data) => {
         console.log('image been saved.');
         console.log(data);
@@ -78,11 +89,10 @@ export default function CameraScreen( { route } ) {
                     </Pressable>
                 </View>
             </Camera>
-            <Button
-                title="Take Picture"
-                style={styles.buttonTake}
-                onPress={takePic}
-            />
+
+            <Button title="Existing Image" style={styles.buttonTake} onPress={ useImageGallery() } />
+            <Button title="Take Picture" style={styles.buttonTake} onPress={takePic} />
+
         </View>
     );
 }
