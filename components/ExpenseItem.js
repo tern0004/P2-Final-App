@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation} from '@react-navigation/native';
-import {StyleSheet, Text, Pressable} from 'react-native';
+import {StyleSheet, Text, Pressable, View, Button} from 'react-native';
 import { useFonts } from 'expo-font';
 
 function ExpenseItem (props) {
@@ -14,13 +14,14 @@ function ExpenseItem (props) {
     if (!loaded) { return null }
 
     return (
-            <Pressable style={styles.item} onPress={ () => { navigation.navigate('ExpenseDetails') }}>
+            <View style = {styles.item}>
+            <Pressable onPress={ () => { navigation.navigate('ExpenseDetails') }}>
                 <Text style={styles.itemMoney}>${props.price}</Text>
                 <Text style={styles.itemTitle}>{props.title}</Text>
             </Pressable>
+            <Button style={styles.itemDetails} title="Delete" onPress={()=> props.deleteExpense(props.id)} />
+            </View>
     )
-
-
 }
 const styles = StyleSheet.create({
     item: {
