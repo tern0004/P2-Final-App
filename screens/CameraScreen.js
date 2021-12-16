@@ -34,9 +34,9 @@ export default function CameraScreen( { route } ) {
 
         let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if(permission.granted === false) { return }
-
         let picker = await ImagePicker.launchImageLibraryAsync()
         console.log(picker)
+
     }
 
     const beenSaved = (data) => {
@@ -90,8 +90,8 @@ export default function CameraScreen( { route } ) {
                 </View>
             </Camera>
 
-            <Button title="Existing Image" style={styles.buttonTake} onPress={ useImageGallery() } />
-            <Button title="Take Picture" style={styles.buttonTake} onPress={takePic} />
+            <Button title="Existing Image" style={styles.buttonTake} onPress={ () => { useImageGallery() } } />
+            <Button title="Take Picture" style={styles.buttonTake} onPress={ () =>{ takePic() } } />
 
         </View>
     );
