@@ -17,11 +17,13 @@ function ExpenseItem (props) {
 
     return (
             <View style = {styles.item}>
-                <Pressable onPress={ () => { navigation.navigate('ExpenseDetails', { props }) }}>
-                    <Text style={styles.itemMoney}>${props.price}</Text>
-                    <Text style={styles.itemTitle}>{props.title}</Text>
+                <Pressable style={styles.itemContainer} onPress={ () => { navigation.navigate('ExpenseDetails', { props }) }}>
+                <Text style={styles.itemMoney}>${props.price}</Text>
+                <Text style={styles.itemTitle}>{props.title}</Text>
                 </Pressable>
-                <Button style={styles.itemDetails} title="Delete" onPress={()=> props.deleteExpense(id)} />
+                <Pressable onPress={()=> props.deleteExpense(id)}>
+                    <Text style={styles.itemDelete}>Delete</Text>
+                </Pressable>
             </View>
     )
 }
@@ -33,12 +35,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 20
+        borderBottomWidth: 1,
+        marginVertical: 1
     },
     itemMoney: {
         fontSize: 24,
         fontFamily: 'Handlee-Regular',
-        color: 'red'
+        color: 'black',
+        
     },
     itemDetails: {
         fontSize: 18,
@@ -47,7 +51,17 @@ const styles = StyleSheet.create({
     },
     itemTitle: {
         fontSize: 20,
-        fontFamily: 'Handlee-Regular'
+        fontFamily: 'Handlee-Regular',
+        marginLeft: 30
+    },
+    itemDelete: {
+        fontSize: 20,
+        color: "red"
+    },
+    itemContainer: {
+        flex: 1, 
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
     }
 
 })

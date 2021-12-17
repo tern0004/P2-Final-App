@@ -37,6 +37,7 @@ export default function App() {
         setItem(JSON.stringify([...expenses, item]))
       .then(() => {
         console.log('saved new value in array');
+        console.log(expenses)
       })
       .catch(console.log);
     //item in AsyncStorage is a String representation of the Array
