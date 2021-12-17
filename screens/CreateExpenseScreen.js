@@ -35,13 +35,21 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
     }, [imageFile])
 
     const onSubmit = (ev) => {
-        let newDate = Date.now()
-        addExpense({id: newDate, title, price, imageFile})
+
+        if (title != null && price != null && price > 0) {
+
+            let newDate = Date.now()
+            addExpense({id: newDate, title, price, imageFile})
+
+            // setDate(null)
+            navigation.navigate('Home')
+
+        } else { Alert.alert('Error', 'Fields need to be filled',[{ text: 'OK', onPress: ()=> { console.log('Closed') } }]) }
+
         onChangeTitle("")
         onChangePrice(null)
         onChangeImageFile(null)
-        // setDate(null)
-        navigation.navigate('Home')
+
     }
 
     const setCameraImage = (data) => {
@@ -53,21 +61,6 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         navigation.navigate('CameraScreen', { setCameraImage })
     }
 
-    const useImageGallery = async () => {
-
-      let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if(permission.granted === false) { return }
-
-      let picker = await ImagePicker.launchImageLibraryAsync()
-      console.log(picker)
-    }
-    const onAddImage = () => {
-        Alert.alert('Add  Image','Choose how do you want to add image.', [
-            { text: 'Camera', onPress: () => { useCameraImage() } },
-            { text: 'Existing Image', onPress: () => { useImageGallery() } }
-        ])
-
-    }
 
     return (
 
@@ -100,7 +93,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           <Button
               title = 'Add Picture'
               onPress = { () => {
-                  onAddImage()
+                  useCameraImage()
               }}
           />
 
@@ -112,7 +105,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           />
           
           {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
-          
+
       </ScrollView>
     </KeyboardAvoidingView>
 
