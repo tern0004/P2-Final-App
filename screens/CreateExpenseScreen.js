@@ -15,8 +15,7 @@ import {
     Platform
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import * as ImagePicker from 'expo-image-picker';
-import { Camera } from 'expo-camera';
+
 
 
 
@@ -24,7 +23,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
 
 
-    const [title, onChangeTitle] = useState("")
+    const [title, onChangeTitle] = useState(null)
     const [price, onChangePrice] = useState(null)
     const [imageFile, onChangeImageFile] = useState(null)
 
@@ -44,11 +43,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
             // setDate(null)
             navigation.navigate('Home')
 
-        } else { Alert.alert('Error', 'Fields need to be filled',[{ text: 'OK', onPress: ()=> { console.log('Closed') } }]) }
+            onChangeTitle("")
+            onChangePrice(null)
+            onChangeImageFile(null)
 
-        onChangeTitle("")
-        onChangePrice(null)
-        onChangeImageFile(null)
+        } else { Alert.alert('Error', 'Required Fields not filled',[{ text: 'OK', onPress: ()=> { console.log('Closed') } }]) }
+        
+        
 
     }
 

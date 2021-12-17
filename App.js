@@ -67,7 +67,9 @@ export default function App() {
                 <Stack.Screen name = "CameraScreen" >
                     {(props) => <CameraScreen {...props} />}
                 </Stack.Screen>
-                <Stack.Screen name='ExpenseDetails' component={ExpenseDetails} />
+                <Stack.Screen name='ExpenseDetails'  >
+                  {(props) => <ExpenseDetails {...props} expenses = {expenses}/>}
+                </Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
     );
