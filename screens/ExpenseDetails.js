@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, SafeAreaView, View, StyleSheet, Image, Button, Alert} from "react-native";
+import {Text, SafeAreaView, View, StyleSheet, Image, Button, Alert, ScrollView} from "react-native";
 import { useEffect, useState } from 'react'
 
 function ExpenseDetails({ route, expenses }) {
@@ -15,6 +15,7 @@ function ExpenseDetails({ route, expenses }) {
         console.log(route.params.props)
     }
     return (
+        <ScrollView>
         <SafeAreaView style={styles.itemElement}>
            <Image style={styles.itemImage} source={require('../assets/adaptive-icon.png')}/>
             <Text style={styles.itemTitle}>{title}</Text>
@@ -31,7 +32,9 @@ function ExpenseDetails({ route, expenses }) {
                 <Button title='Delete' onPress={() => { deleteExpense() }} />
                 <Button title='Edit' onPress={() => { console.log('Go to Edit screen!!!')}}/>
             </View>
+            {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
         </SafeAreaView>
+        </ScrollView>
     );
 }
 
@@ -74,6 +77,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Verdana',
         fontWeight: 'normal'
+    },
+    imageView: {
+        height: 300,
+        width: 300
     }
 
 })
