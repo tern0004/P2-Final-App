@@ -4,11 +4,31 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from "expo-image-picker";
 
 
-export default function CameraScreen( { route } ) {
+export default function CameraScreen( { route, navigation } ) {
     const [ready, setReady] = useState(false);
     let camera = useRef();
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
+
+
+    useEffect(() => {
+        (async () => {
+            const { status } = await Camera.requestCameraPermissionsAsync();
+            setHasPermission(status === 'granted');
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+        const {
+            status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            alert("Fine. Then you can't use my app.");
+        }
+        })();
+    }, []);
+    
 
     const takePic = () => {
         //take a picture
@@ -20,36 +40,27 @@ export default function CameraScreen( { route } ) {
         camera
             .takePictureAsync(options)
             .then(({ uri, width, height, exif, base64 }) => {
-                //temporary uri saved to app cache
-                // console.log(width, height);
-                // console.log(exif);
-                console.log(base64)
                 route.params.setCameraImage(uri)
-                //use https://docs.expo.dev/versions/v43.0.0/sdk/filesystem/#filesystemcopyasyncoptions
-                //to permanently save the image
+                navigation.navigate('CreateExpense',)
             });
     };
 
     const useImageGallery = async () => {
 
-        let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if(permission.granted === false) { return }
-        let picker = await ImagePicker.launchImageLibraryAsync()
-        console.log(picker)
-
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+          if (!result.cancelled) {
+            route.params.setCameraImage(result.uri);
+            navigation.navigate('CreateExpense')
+          }
     }
 
-    const beenSaved = (data) => {
-        console.log('image been saved.');
-        console.log(data);
-    };
 
-    useEffect(() => {
-        (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
-    }, []);
+    
 
     if (hasPermission === null) {
         return <View style={styles.container} />;

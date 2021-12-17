@@ -10,8 +10,9 @@ function ExpenseList(props) {
 
                 <FlatList
                     data={ props.expensesData }
-                    renderItem={({ item }) => <ExpenseItem price={ item.price } title={ item.title } deleteExpense={props.deleteExpense} id={item.id}/> }
+                    renderItem={({ item }) => <ExpenseItem price={ item.price } title={ item.title } deleteExpense={props.deleteExpense} id={item.id} imageFile={item.imageFile}/> }
                     keyExtractor={(item) => item.id}
+                    extraData={props.deleteExpense}
                 />
 
         </SafeAreaView>

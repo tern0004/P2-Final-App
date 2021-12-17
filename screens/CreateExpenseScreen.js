@@ -12,11 +12,12 @@ import {
     Alert,
     Image, 
     KeyboardAvoidingView,
-    Platform
+    Platform,
+    View
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import * as ImagePicker from 'expo-image-picker';
-import { Camera } from 'expo-camera';
+import { AutoFocus } from 'expo-camera/build/Camera.types';
+
 
 
 
@@ -24,7 +25,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
 
 
-    const [title, onChangeTitle] = useState("")
+    const [title, onChangeTitle] = useState(null)
     const [price, onChangePrice] = useState(null)
     const [imageFile, onChangeImageFile] = useState(null)
 
@@ -44,11 +45,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
             // setDate(null)
             navigation.navigate('Home')
 
-        } else { Alert.alert('Error', 'Fields need to be filled',[{ text: 'OK', onPress: ()=> { console.log('Closed') } }]) }
+            onChangeTitle("")
+            onChangePrice(null)
+            onChangeImageFile(null)
 
-        onChangeTitle("")
-        onChangePrice(null)
-        onChangeImageFile(null)
+        } else { Alert.alert('Error', 'Required Fields not filled',[{ text: 'OK', onPress: ()=> { console.log('Closed') } }]) }
+        
+        
 
     }
 
@@ -61,9 +64,6 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         navigation.navigate('CameraScreen', { setCameraImage })
     }
 
-    const onAddImage = () => {
-        navigation.navigate('CameraScreen')
-    }
 
     return (
 
@@ -73,8 +73,10 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ScrollView style={styles.scrollView}>
-          <Text>Expense Screen</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.expenseTitle}>Expense Screen</Text>
           <StatusBar style="auto" />
+          <Text></Text>
           <TextInput 
           style={styles.input}
           onSubmitEditing={Keyboard.dismiss}
@@ -90,27 +92,24 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           placeholder= "enter expense value"
           keyboardType = "numeric"
           onSubmitEditing={Keyboard.dismiss}
-
           />
-
+          {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
+        </View>
           <Button
-
-              title = 'Add Picture'
+              title = 'Add Receipt'
               onPress = { () => {
-                  onAddImage()
+                  useCameraImage()
               }}
           />
 
           <Button
-          title = {"submit"}
+          title = {"Submit"}
           onPress = { () => {
             onSubmit()
           }}
           />
-
-
-          {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
-
+          
+          
 
       </ScrollView>
     </KeyboardAvoidingView>
@@ -120,26 +119,35 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
 
 const styles = StyleSheet.create({
     container: {
-
       flex: 1,
-      backgroundColor: '#fff',
-      
     },
     input: {
       height: 40,
-      margin: 12,
+      marginHorizontal: 12,
+      marginVertical: 5,
+
       borderWidth: 1,
       padding: 10,
     },
     scrollView: {
-      backgroundColor: 'pink',
-      marginHorizontal: 20
+      
+      
     },
     imageView: {
-
         height: 300,
-        width: 300
-
+        width: 300,
+        alignSelf: 'center',
+        marginVertical: 40,
+        
+    },
+    inputContainer: {
+      backgroundColor: '#FFF',
+      paddingHorizontal: 10,
+      
+      
+    },
+    expenseTitle: {
+      fontSize: 25, 
     }
   });
 

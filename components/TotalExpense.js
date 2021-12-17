@@ -11,7 +11,8 @@ function TotalExpense(props) {
 
     return (
         <View style={styles.totalItem}>
-            <Text style={styles.totalItemTxt}>{sum}</Text>
+            <Text>Total Expense: </Text>
+            <Text style={styles.totalItemTxt}>${sum}</Text>
         </View>
     );
 }

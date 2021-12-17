@@ -1,18 +1,25 @@
 import React from 'react';
-import {Text, SafeAreaView, View, StyleSheet, Image, Button, Alert} from "react-native";
+import {Text, SafeAreaView, View, StyleSheet, Image, Button, Alert, ScrollView} from "react-native";
+import { useEffect, useState } from 'react'
 
-function ExpenseDetails() {
-    function deleteExpense() {
-        Alert.alert('Want to delete Expense?','Do you realy want to delete this expense?',[
-            {text: 'Yes!', onPress: () => { console.log('Deleted')}},
-            {text: 'No!', onPress: () => { console.log('Alert closed')}
-            }])
+function ExpenseDetails({ route, expenses }) {
+
+    
+    const {id, price, title, imageFile} = route.params.props
+    const [detailItem, setDetailItem] = useState([])
+
+
+    
+
+    function deleteExpense( ) {
+        console.log(route.params.props)
     }
     return (
+        <ScrollView>
         <SafeAreaView style={styles.itemElement}>
            <Image style={styles.itemImage} source={require('../assets/adaptive-icon.png')}/>
-            <Text style={styles.itemTitle}>Expense Title</Text>
-            <Text style={styles.itemDescription}>Expense Description</Text>
+            <Text style={styles.itemTitle}>{title}</Text>
+            <Text style={styles.itemDescription}>{price}</Text>
             <View style={styles.itemDescriptionBox}>
                 <Text style={styles.itemDescriptionBoxTxt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -25,7 +32,9 @@ function ExpenseDetails() {
                 <Button title='Delete' onPress={() => { deleteExpense() }} />
                 <Button title='Edit' onPress={() => { console.log('Go to Edit screen!!!')}}/>
             </View>
+            {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
         </SafeAreaView>
+        </ScrollView>
     );
 }
 
@@ -68,6 +77,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Verdana',
         fontWeight: 'normal'
+    },
+    imageView: {
+        height: 300,
+        width: 300
     }
 
 })
