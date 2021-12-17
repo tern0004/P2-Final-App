@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Button, ScrollView } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from "expo-image-picker";
 
@@ -76,8 +76,8 @@ export default function CameraScreen( { route, navigation } ) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text>Camera Demo</Text>
+        <ScrollView style={styles.container}>
+            
             <Camera
                 style={styles.camera}
                 type={type}
@@ -85,7 +85,7 @@ export default function CameraScreen( { route, navigation } ) {
                     camera = r;
                 }}
             >
-                <View style={styles.buttonContainer}>
+                <View>
                     <Pressable
                         style={styles.button}
                         onPress={() => {
@@ -100,30 +100,48 @@ export default function CameraScreen( { route, navigation } ) {
                     </Pressable>
                 </View>
             </Camera>
+        
+            <View style={styles.buttonContainer}>
+            <Button title="Take Picture" style={styles.buttonTake}  onPress={ () =>{ takePic() } } />
+            <Button title="Pick Image" style={styles.buttonTake}  onPress={ () => { useImageGallery() } } />
+            </View>
 
-            <Button title="Existing Image" style={styles.buttonTake} onPress={ () => { useImageGallery() } } />
-            <Button title="Take Picture" style={styles.buttonTake} onPress={ () =>{ takePic() } } />
-
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 10,
+        // flex: 1,
+        // flexDirection: 'column',
+        // justifyContent: 'space-around'
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     camera: {
-        width: 300,
-        height: 400,
+        width: 350,
+        height: 425,
         margin: 10,
     },
-    buttonContainer: {},
     text: {
         color: 'white',
         fontSize: 24,
     },
-    buttonTake: {},
+    buttonTake: {
+        height: 10,
+        width: 40,
+        marginTop: 30
+    },
+    buttonContainer: {
+        
+        flex: 1,
+        flexDirection: 'row',
+      justifyContent: 'space-evenly'
+        
+
+    }
+    
 });

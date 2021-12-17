@@ -5,34 +5,38 @@ import { useEffect, useState } from 'react'
 function ExpenseDetails({ route, expenses }) {
 
     
-    const {id, price, title, imageFile} = route.params.props
+    const {id, price, title, imageFile, expenseDate} = route.params.props
     const [detailItem, setDetailItem] = useState([])
 
 
-    
+    console.log(route.params.props)
 
-    function deleteExpense( ) {
-        console.log(route.params.props)
-    }
+    
     return (
         <ScrollView>
+        <Text style={styles.expenseTitle}>Expense Details</Text>
         <SafeAreaView style={styles.itemElement}>
-           <Image style={styles.itemImage} source={require('../assets/adaptive-icon.png')}/>
-            <Text style={styles.itemTitle}>{title}</Text>
-            <Text style={styles.itemDescription}>{price}</Text>
-            <View style={styles.itemDescriptionBox}>
-                <Text style={styles.itemDescriptionBoxTxt}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </Text>
+           {/* <Image style={styles.itemImage} source={require('../assets/adaptive-icon.png')}/> */}
+           <View style={styles.detailContainer}>
+                <Text style={styles.detailDescriptor}>Expense name: </Text>
+                <Text style={styles.itemTitle}>{title}</Text>
             </View>
-            <View>
-                <Button title='Delete' onPress={() => { deleteExpense() }} />
-                <Button title='Edit' onPress={() => { console.log('Go to Edit screen!!!')}}/>
+            <View style={styles.detailContainer}>
+                <Text style={styles.detailDescriptor}>Cost: </Text>
+                <Text style={styles.itemPrice}>{price}</Text>
             </View>
-            {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
+            <View style={styles.detailContainer}>
+                <Text style={styles.detailDescriptor}>Date Created: </Text>
+                <Text style={styles.itemDate}>{expenseDate}</Text>
+            </View>
+                
+            
+            {imageFile && ( 
+            <View style={styles.imageContainer}>
+                <Text style={styles.detailDescriptor}>Receipt</Text>
+                <Image style = {styles.imageView} source = {{uri: imageFile}} /> 
+            </View>
+            )}
         </SafeAreaView>
         </ScrollView>
     );
@@ -42,12 +46,34 @@ const styles = StyleSheet.create({
 
     itemElement: {
         backgroundColor: '#FFF',
-        padding: 32,
+        paddingVertical: 30,
+        paddingHorizontal: 20,
         borderRadius: 16,
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        // alignItems: 'flex-start',
+        justifyContent: 'center',
         marginBottom: 20,
-        marginTop: 20
+        marginHorizontal: 10
+        
+    },
+    expenseTitle: {
+        fontSize: 20, 
+        marginLeft:10,
+        marginTop:20,
+        marginBottom: 5
+      },
+    detailContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        fontSize: 20,
+        fontFamily: 'Verdana',
+        marginBottom: 10
+    },
+    detailDescriptor: {
+        fontSize: 16,
+        fontFamily: 'Verdana',
+        fontWeight: 'bold',
+        marginBottom: 20
+
     },
     itemImage: {
         width: 128,
@@ -55,28 +81,27 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
     itemTitle: {
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Verdana',
-        fontWeight: 'bold'
     },
-    itemDescription: {
-        fontSize: 20,
+    itemDate: {
+        fontSize: 16
+    },
+    itemPrice: {
+        fontSize: 16,
         fontFamily: 'Verdana',
-        fontWeight: 'bold'
-    },
-    itemDescriptionBox: {
-        backgroundColor: '#FFF',
-        padding: 32,
-        borderRadius: 16,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 20,
-        marginTop: 20
+        
     },
     itemDescriptionBoxTxt: {
         fontSize: 16,
         fontFamily: 'Verdana',
         fontWeight: 'normal'
+    },
+    imageContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 30
     },
     imageView: {
         height: 300,

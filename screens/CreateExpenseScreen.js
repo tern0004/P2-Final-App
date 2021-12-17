@@ -40,7 +40,12 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
         if (title != null && price != null && price > 0) {
 
             let newDate = Date.now()
-            addExpense({id: newDate, title, price, imageFile})
+            let newDateString = new Date()
+            let formattedDate = newDateString.toLocaleDateString()
+            let formattedTime = newDateString.toLocaleTimeString()
+            let completedDateString = formattedDate + " " + formattedTime
+
+            addExpense({id: newDate, title, price, imageFile, expenseDate: completedDateString})
 
             // setDate(null)
             navigation.navigate('Home')
@@ -73,10 +78,11 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ScrollView style={styles.scrollView}>
+      <Text style={styles.expenseTitle}>Create New Expense</Text>
+
         <View style={styles.inputContainer}>
-          <Text style={styles.expenseTitle}>Expense Screen</Text>
           <StatusBar style="auto" />
-          <Text></Text>
+          
           <TextInput 
           style={styles.input}
           onSubmitEditing={Keyboard.dismiss}
@@ -95,6 +101,13 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
           />
           {imageFile && ( <Image style = {styles.imageView} source = {{uri: imageFile}} /> )}
         </View>
+        <View style={styles.buttonContainer}>
+          <Button
+          title = {"Submit Expense"}
+          onPress = { () => {
+            onSubmit()
+          }}
+          />
           <Button
               title = 'Add Receipt'
               onPress = { () => {
@@ -102,13 +115,7 @@ export default function CreateExpenseScreen( { route, navigation, addExpense }) 
               }}
           />
 
-          <Button
-          title = {"Submit"}
-          onPress = { () => {
-            onSubmit()
-          }}
-          />
-          
+          </View>
           
 
       </ScrollView>
@@ -125,17 +132,17 @@ const styles = StyleSheet.create({
       height: 40,
       marginHorizontal: 12,
       marginVertical: 5,
-
       borderWidth: 1,
       padding: 10,
+      borderRadius: 4
     },
     scrollView: {
-      
+      margin: 10,
       
     },
     imageView: {
-        height: 300,
-        width: 300,
+        height: 425,
+        width: 350,
         alignSelf: 'center',
         marginVertical: 40,
         
@@ -143,11 +150,19 @@ const styles = StyleSheet.create({
     inputContainer: {
       backgroundColor: '#FFF',
       paddingHorizontal: 10,
-      
+      padding: 40,
+      margin: 5,
+      borderRadius: 16
       
     },
     expenseTitle: {
-      fontSize: 25, 
+      fontSize: 20, 
+      marginLeft:10,
+    },
+    buttonContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-evenly'
     }
   });
 

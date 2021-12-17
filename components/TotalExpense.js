@@ -11,7 +11,7 @@ function TotalExpense(props) {
 
     return (
         <View style={styles.totalItem}>
-            <Text>Total Expense: </Text>
+            <Text>Total Expense:</Text>
             <Text style={styles.totalItemTxt}>${sum}</Text>
         </View>
     );
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default TotalExpense;
+export default TotalExpense; 
