@@ -4,7 +4,7 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from "expo-image-picker";
 
 
-export default function CameraScreen( { route } ) {
+export default function CameraScreen( { route, navigation } ) {
     const [ready, setReady] = useState(false);
     let camera = useRef();
     const [hasPermission, setHasPermission] = useState(null);
@@ -40,13 +40,8 @@ export default function CameraScreen( { route } ) {
         camera
             .takePictureAsync(options)
             .then(({ uri, width, height, exif, base64 }) => {
-                //temporary uri saved to app cache
-                // console.log(width, height);
-                // console.log(exif);
-                console.log(base64)
                 route.params.setCameraImage(uri)
-                //use https://docs.expo.dev/versions/v43.0.0/sdk/filesystem/#filesystemcopyasyncoptions
-                //to permanently save the image
+                navigation.navigate('CreateExpense',)
             });
     };
 
@@ -60,6 +55,7 @@ export default function CameraScreen( { route } ) {
           });
           if (!result.cancelled) {
             route.params.setCameraImage(result.uri);
+            navigation.navigate('CreateExpense')
           }
     }
 
